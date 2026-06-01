@@ -165,10 +165,12 @@ function AboutSection() {
 function ExperienceSection() {
   const roles = [
     {
-      title: "Infrastructure → Backend → Full-Stack → DevOps Engineer",
+      title: "Infrastructure → DevOps Engineer",
       company: "Government Sector — Sultanate of Oman",
       period: "2020 – Present",
       tag: "6 Years",
+      icon: "GOV",
+      gradient: "from-amber-500/15 to-amber-900/5",
       points: [
         "Six-year progression through the full enterprise IT stack inside a mission-critical government environment.",
         "Started in infrastructure: Windows Server, Active Directory, networking, and systems administration.",
@@ -181,6 +183,8 @@ function ExperienceSection() {
       company: "Independent / Project-based",
       period: "2020 – Present",
       tag: "6 Years",
+      icon: "FRL",
+      gradient: "from-white/8 to-white/2",
       points: [
         "Six continuous years of freelance across backend, DevOps, AI, and multi-tenant SaaS.",
         "Building and operating a multi-tenant GCC marketplace platform on ASP.NET Core and Clean Architecture.",
@@ -196,38 +200,48 @@ function ExperienceSection() {
         <SectionLabel number="02" label="Experience" />
       </motion.div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {roles.map((role, i) => (
-          <motion.div
-            key={i}
-            {...fadeUp(i * 0.1)}
-            className="group rounded-2xl border border-white/6 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 p-7 md:p-9"
-          >
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
-              <div>
-                <h3 className="text-lg md:text-xl font-semibold text-white leading-snug mb-1">
-                  {role.title}
-                </h3>
-                <p className="text-sm text-white/40">{role.company}</p>
+          <motion.div key={i} {...fadeUp(i * 0.1)}>
+            <Card className="flex flex-col sm:flex-row border border-white/8 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/12 transition-all duration-300 overflow-hidden rounded-3xl">
+              {/* Left accent panel */}
+              <div className={`relative h-[100px] w-full shrink-0 overflow-hidden sm:h-auto sm:w-[130px] bg-gradient-to-br ${role.gradient} flex items-center justify-center`}>
+                <span className="text-2xl font-black text-amber-400/60 tracking-widest select-none">
+                  {role.icon}
+                </span>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
-                <Chip className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold px-2 py-0.5 rounded-full">
-                  {role.tag}
-                </Chip>
-                <span className="text-xs text-white/30 font-mono">{role.period}</span>
+
+              {/* Content */}
+              <div className="flex flex-1 flex-col">
+                <Card.Header className="gap-1 pb-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full pr-2">
+                    <Card.Title className="text-base sm:text-lg font-semibold text-white leading-snug">
+                      {role.title}
+                    </Card.Title>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Chip className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                        {role.tag}
+                      </Chip>
+                      <span className="text-[11px] text-white/30 font-mono">{role.period}</span>
+                    </div>
+                  </div>
+                  <Card.Description className="text-sm text-white/40">{role.company}</Card.Description>
+                </Card.Header>
+
+                <Separator className="bg-white/5 mx-4" />
+
+                <Card.Content className="pt-3 pb-4">
+                  <ul className="space-y-2">
+                    {role.points.map((pt, j) => (
+                      <li key={j} className="flex items-start gap-2.5 text-sm text-white/50 leading-relaxed">
+                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-500/50" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </Card.Content>
               </div>
-            </div>
-
-            <Separator className="bg-white/5 mb-5" />
-
-            <ul className="space-y-2.5">
-              {role.points.map((pt, j) => (
-                <li key={j} className="flex items-start gap-3 text-sm text-white/50 leading-relaxed">
-                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-500/50" />
-                  {pt}
-                </li>
-              ))}
-            </ul>
+            </Card>
           </motion.div>
         ))}
       </div>
