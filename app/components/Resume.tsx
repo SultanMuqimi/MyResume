@@ -165,6 +165,7 @@ function AboutSection() {
 function ExperienceSection() {
   const roles = [
     {
+      num: "01",
       title: "Infrastructure → DevOps Engineer",
       company: "Government Sector — Sultanate of Oman",
       period: "2020 – Present",
@@ -177,6 +178,7 @@ function ExperienceSection() {
       ],
     },
     {
+      num: "02",
       title: "Freelance Developer & DevOps Engineer",
       company: "Independent / Project-based",
       period: "2020 – Present",
@@ -199,34 +201,36 @@ function ExperienceSection() {
       <div className="space-y-4">
         {roles.map((role, i) => (
           <motion.div key={i} {...fadeUp(i * 0.1)}>
-            <Card className="bg-white rounded-2xl shadow-none border-0 overflow-hidden">
-              <Card.Header className="pb-2 gap-1">
-                <div className="flex items-start justify-between w-full">
-                  <div>
-                    <Card.Title className="text-base sm:text-lg font-semibold text-gray-900 leading-snug">
-                      {role.title}
-                    </Card.Title>
-                    <Card.Description className="text-sm text-gray-500 mt-0.5">
-                      {role.company}
-                    </Card.Description>
-                  </div>
-                  <div className="shrink-0 text-right ml-4">
-                    <p className="text-sm font-semibold text-gray-900">{role.tag}</p>
-                    <p className="text-xs text-gray-400 font-mono">{role.period}</p>
-                  </div>
+            <Card className="bg-white rounded-3xl overflow-hidden shadow-none border-0">
+              <div className="flex flex-col sm:flex-row">
+                {/* Left accent — large number */}
+                <div className="flex items-center justify-center bg-amber-50 sm:w-24 py-5 sm:py-0 shrink-0">
+                  <span className="text-5xl font-black text-amber-300 select-none leading-none">{role.num}</span>
                 </div>
-              </Card.Header>
 
-              <Card.Content className="pt-0 pb-4">
-                <ul className="space-y-1.5 mt-2">
-                  {role.points.map((pt, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed">
-                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </Card.Content>
+                {/* Right content */}
+                <div className="flex-1 p-6 pb-5">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 leading-tight">{role.title}</h3>
+                      <p className="text-sm text-gray-400 mt-0.5">{role.company}</p>
+                    </div>
+                    <div className="shrink-0 sm:text-right flex sm:flex-col gap-2 sm:gap-0 items-center sm:items-end">
+                      <span className="text-sm font-bold text-gray-900">{role.tag}</span>
+                      <span className="text-xs text-gray-400 font-mono sm:mt-0.5">{role.period}</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2">
+                    {role.points.map((pt, j) => (
+                      <li key={j} className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed">
+                        <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </Card>
           </motion.div>
         ))}
@@ -278,45 +282,105 @@ function ProjectsSection() {
         <SectionLabel number="03" label="Selected Projects" />
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {projects.map((p, i) => (
-          <motion.div key={i} {...fadeUp(i * 0.1)}>
-            <Card className="bg-white rounded-2xl shadow-none border-0 h-full">
-              <Card.Header className="gap-1 pb-2">
-                <div className="flex items-start justify-between gap-2 w-full">
-                  <Card.Title className="text-base font-bold text-gray-900">{p.name}</Card.Title>
-                  <Chip className="bg-amber-50 text-amber-700 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 border border-amber-200">
-                    {p.tag}
-                  </Chip>
+      {/* Bento grid — row 1 */}
+      <div className="grid grid-cols-12 gap-4">
+        {/* Vision AI — large */}
+        <motion.div {...fadeUp(0)} className="col-span-12 md:col-span-7">
+          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[200px] flex flex-col">
+            <Card.Header className="pb-0">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[0].tag}</span>
+                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[0].name}</Card.Title>
                 </div>
-                {p.url && (
-                  <a
-                    href={`https://${p.url}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-gray-400 hover:text-amber-600 transition-colors font-mono"
-                  >
-                    {p.url} ↗
-                  </a>
-                )}
-                <Card.Description className="text-sm text-gray-500 leading-relaxed mt-1">
-                  {p.description}
-                </Card.Description>
-              </Card.Header>
+                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">01</span>
+              </div>
+            </Card.Header>
+            <Card.Content className="flex-1">
+              <p className="text-sm text-gray-500 leading-relaxed">{projects[0].description}</p>
+            </Card.Content>
+            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
+              {projects[0].stack.map(t => (
+                <span key={t} className="px-2.5 py-1 rounded-lg bg-amber-50 text-[11px] text-amber-700 font-mono border border-amber-100">{t}</span>
+              ))}
+            </Card.Footer>
+          </Card>
+        </motion.div>
 
-              <Card.Footer className="pt-0 flex flex-wrap gap-1.5">
-                {p.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </Card.Footer>
-            </Card>
-          </motion.div>
-        ))}
+        {/* Qias — small */}
+        <motion.div {...fadeUp(0.1)} className="col-span-12 md:col-span-5">
+          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[200px] flex flex-col">
+            <Card.Header className="pb-0">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[2].tag}</span>
+                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[2].name}</Card.Title>
+                </div>
+                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">02</span>
+              </div>
+            </Card.Header>
+            <Card.Content className="flex-1">
+              <p className="text-sm text-gray-500 leading-relaxed">{projects[2].description}</p>
+            </Card.Content>
+            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
+              {projects[2].stack.map(t => (
+                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
+              ))}
+            </Card.Footer>
+          </Card>
+        </motion.div>
+
+        {/* Forge — small */}
+        <motion.div {...fadeUp(0.2)} className="col-span-12 md:col-span-5">
+          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[180px] flex flex-col">
+            <Card.Header className="pb-0">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[3].tag}</span>
+                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[3].name}</Card.Title>
+                  {projects[3].url && (
+                    <a href={`https://${projects[3].url}`} target="_blank" rel="noopener noreferrer"
+                      className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors">
+                      {projects[3].url} ↗
+                    </a>
+                  )}
+                </div>
+                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">03</span>
+              </div>
+            </Card.Header>
+            <Card.Content className="flex-1">
+              <p className="text-sm text-gray-500 leading-relaxed">{projects[3].description}</p>
+            </Card.Content>
+            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
+              {projects[3].stack.map(t => (
+                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
+              ))}
+            </Card.Footer>
+          </Card>
+        </motion.div>
+
+        {/* Digital Marketplace — large */}
+        <motion.div {...fadeUp(0.3)} className="col-span-12 md:col-span-7">
+          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[180px] flex flex-col">
+            <Card.Header className="pb-0">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[1].tag}</span>
+                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[1].name}</Card.Title>
+                </div>
+                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">04</span>
+              </div>
+            </Card.Header>
+            <Card.Content className="flex-1">
+              <p className="text-sm text-gray-500 leading-relaxed">{projects[1].description}</p>
+            </Card.Content>
+            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
+              {projects[1].stack.map(t => (
+                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
+              ))}
+            </Card.Footer>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );
@@ -361,28 +425,26 @@ function SkillsSection() {
         <SectionLabel number="04" label="Skills & Stack" />
       </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="divide-y divide-white/5">
         {groups.map((g, i) => (
-          <motion.div key={i} {...fadeUp(i * 0.05)}>
-            <Card className="bg-white rounded-2xl shadow-none border-0 h-full">
-              <Card.Header className="pb-2">
-                <Card.Title className="text-xs font-bold text-gray-900 uppercase tracking-widest">
-                  {g.label}
-                </Card.Title>
-              </Card.Header>
-              <Card.Content className="pt-0">
-                <div className="flex flex-wrap gap-1.5">
-                  {g.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-2 py-0.5 rounded-md bg-gray-100 text-[11px] text-gray-600 font-medium"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </Card.Content>
-            </Card>
+          <motion.div
+            key={i}
+            {...fadeUp(i * 0.05)}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-8 py-6 first:pt-0 last:pb-0"
+          >
+            <div className="sm:w-40 shrink-0 pt-0.5">
+              <span className="text-[11px] font-bold text-amber-500/80 uppercase tracking-[0.15em]">{g.label}</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {g.items.map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1 rounded-full bg-white/5 border border-white/8 text-[12px] text-white/60 hover:text-white/90 hover:bg-white/8 hover:border-amber-500/30 transition-all duration-150 cursor-default"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>
