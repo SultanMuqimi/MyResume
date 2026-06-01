@@ -584,14 +584,14 @@ const bottomNavItems = [
 
 function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 pb-safe">
-      <div className="mx-4 mb-4 rounded-2xl border border-amber-500/15 bg-black/85 backdrop-blur-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.6)]">
-        <div className="flex items-center justify-around px-2 py-3">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 pb-safe flex justify-center">
+      <div className="mx-4 mb-4 rounded-2xl bg-black/85 backdrop-blur-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.6)] w-fit">
+        <div className="flex items-center justify-center gap-1 px-4 py-3">
           {bottomNavItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="group flex flex-col items-center gap-1.5 px-3 py-1 rounded-xl text-white/35 hover:text-amber-400 transition-all duration-200"
+              className="group flex flex-col items-center gap-1.5 px-3 py-1 rounded-xl text-amber-400 hover:text-amber-300 transition-all duration-200"
             >
               <span className="transition-all duration-200 group-hover:scale-110 group-hover:drop-shadow-[0_0_6px_rgba(251,191,36,0.7)]">
                 {item.icon}
