@@ -240,6 +240,66 @@ function ExperienceSection() {
 }
 
 /* ── 4. PROJECTS ──────────────────────────────────────────── */
+interface ProjectCardProps {
+  p: { name: string; url?: string; tag: string; description: string; stack: string[] };
+  num: string;
+  accent?: boolean;
+}
+
+function ProjectCard({ p, num, accent }: ProjectCardProps) {
+  return (
+    <div className={`h-full rounded-3xl flex flex-col overflow-hidden ${accent ? "bg-white" : "bg-white"}`}>
+      <div className="flex flex-col h-full p-6">
+        {/* top */}
+        <div className="flex items-start justify-between mb-4">
+          <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${
+            accent
+              ? "bg-amber-50 border-amber-100 text-amber-600"
+              : "bg-gray-50 border-gray-200 text-gray-500"
+          }`}>
+            {p.tag}
+          </span>
+          <span className="text-4xl font-black text-gray-100 select-none leading-none tabular-nums">
+            {num}
+          </span>
+        </div>
+
+        {/* name */}
+        <h3 className="text-xl font-black text-gray-900 leading-tight mb-1">{p.name}</h3>
+        {p.url && (
+          <a
+            href={`https://${p.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors mb-2 block"
+          >
+            {p.url} ↗
+          </a>
+        )}
+
+        {/* description — clamp so it never overflows */}
+        <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-3 mt-1">
+          {p.description}
+        </p>
+
+        {/* stack — always pinned to bottom */}
+        <div className="flex flex-wrap gap-1.5 mt-4">
+          {p.stack.map((t) => (
+            <span
+              key={t}
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-mono ${
+                accent ? "bg-amber-50 text-amber-600 border border-amber-100" : "bg-gray-100 text-gray-500"
+              }`}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProjectsSection() {
   const projects = [
     {
@@ -282,51 +342,37 @@ function ProjectsSection() {
         <SectionLabel number="03" label="Selected Projects" />
       </motion.div>
 
-      <div className="space-y-3">
-        {projects.map((p, i) => (
-          <motion.div key={i} {...fadeUp(i * 0.08)}>
-            <Card className="bg-white rounded-2xl shadow-none border-0 w-full">
-              <div className="p-6 flex flex-col gap-3">
-                {/* row 1 — number + tag */}
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest bg-amber-50 border border-amber-100 px-3 py-1 rounded-full">
-                    {p.tag}
-                  </span>
-                  <span className="text-3xl font-black text-gray-100 select-none leading-none tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                {/* row 2 — name + link */}
-                <div>
-                  <h3 className="text-xl font-black text-gray-900 leading-tight">{p.name}</h3>
-                  {p.url && (
-                    <a
-                      href={`https://${p.url}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors"
-                    >
-                      {p.url} ↗
-                    </a>
-                  )}
-                </div>
-
-                {/* row 3 — description */}
-                <p className="text-sm text-gray-500 leading-relaxed">{p.description}</p>
-
-                {/* row 4 — stack */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {p.stack.map((t) => (
-                    <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Card>
+      {/* Bento grid — 2 rows, different col widths per cell */}
+      <div
+        className="grid gap-4"
+        style={{
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "auto",
+        }}
+      >
+        {/* Row 1 */}
+        <div className="grid grid-cols-12 gap-4" style={{ gridAutoRows: "260px" }}>
+          {/* Vision AI — wide */}
+          <motion.div {...fadeUp(0)} className="col-span-12 md:col-span-7 h-full">
+            <ProjectCard p={projects[0]} num="01" accent />
           </motion.div>
-        ))}
+          {/* Qias — narrow */}
+          <motion.div {...fadeUp(0.1)} className="col-span-12 md:col-span-5 h-full">
+            <ProjectCard p={projects[2]} num="02" />
+          </motion.div>
+        </div>
+
+        {/* Row 2 */}
+        <div className="grid grid-cols-12 gap-4" style={{ gridAutoRows: "260px" }}>
+          {/* Forge — narrow */}
+          <motion.div {...fadeUp(0.2)} className="col-span-12 md:col-span-5 h-full">
+            <ProjectCard p={projects[3]} num="03" />
+          </motion.div>
+          {/* Digital Marketplace — wide */}
+          <motion.div {...fadeUp(0.3)} className="col-span-12 md:col-span-7 h-full">
+            <ProjectCard p={projects[1]} num="04" accent />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
