@@ -282,48 +282,48 @@ function ProjectsSection() {
         <SectionLabel number="03" label="Selected Projects" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-3">
         {projects.map((p, i) => (
-          <motion.div key={i} {...fadeUp(i * 0.1)} className="flex">
-            <Card className="bg-white rounded-3xl shadow-none border-0 flex flex-col w-full">
-              <Card.Header className="pb-3">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-bold text-amber-500 uppercase tracking-widest border border-amber-200 bg-amber-50 px-2.5 py-1 rounded-full">
+          <motion.div key={i} {...fadeUp(i * 0.08)}>
+            <Card className="bg-white rounded-2xl shadow-none border-0 w-full">
+              <div className="p-6 flex flex-col gap-3">
+                {/* row 1 — number + tag */}
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest bg-amber-50 border border-amber-100 px-3 py-1 rounded-full">
                     {p.tag}
                   </span>
-                  <span className="text-3xl font-black text-gray-100 select-none leading-none">
+                  <span className="text-3xl font-black text-gray-100 select-none leading-none tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <Card.Title className="text-xl font-black text-gray-900 leading-tight">
-                  {p.name}
-                </Card.Title>
-                {p.url && (
-                  <a
-                    href={`https://${p.url}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors mt-0.5 inline-block"
-                  >
-                    {p.url} ↗
-                  </a>
-                )}
-              </Card.Header>
 
-              <Card.Content className="flex-1 pt-0">
+                {/* row 2 — name + link */}
+                <div>
+                  <h3 className="text-xl font-black text-gray-900 leading-tight">{p.name}</h3>
+                  {p.url && (
+                    <a
+                      href={`https://${p.url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors"
+                    >
+                      {p.url} ↗
+                    </a>
+                  )}
+                </div>
+
+                {/* row 3 — description */}
                 <p className="text-sm text-gray-500 leading-relaxed">{p.description}</p>
-              </Card.Content>
 
-              <Card.Footer className="pt-3 flex flex-wrap gap-1.5">
-                {p.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </Card.Footer>
+                {/* row 4 — stack */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {p.stack.map((t) => (
+                    <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </Card>
           </motion.div>
         ))}
