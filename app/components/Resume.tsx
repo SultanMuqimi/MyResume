@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Chip, Link, Divider } from "@heroui/react";
+import { Chip, Link, Separator, Card } from "@heroui/react";
 
 /* ── helpers ──────────────────────────────────────────────── */
 function fadeUp(delay = 0) {
@@ -76,7 +76,7 @@ function HeroSection() {
               <Link
                 key={s.href}
                 href={s.href}
-                isExternal
+                target="_blank" rel="noopener noreferrer"
                 className="text-sm text-white/40 hover:text-amber-400 transition-colors duration-200"
               >
                 {s.label}
@@ -146,16 +146,15 @@ function AboutSection() {
       {/* stats row */}
       <motion.div
         {...fadeUp(0.3)}
-        className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-white/6 rounded-2xl overflow-hidden"
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20"
       >
         {stats.map((s, i) => (
-          <div
-            key={i}
-            className="bg-white/[0.02] hover:bg-white/[0.04] transition-colors px-6 py-8 text-center"
-          >
-            <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">{s.value}</div>
-            <div className="text-xs text-white/35 uppercase tracking-widest">{s.label}</div>
-          </div>
+          <Card key={i} className="bg-white rounded-2xl p-6 gap-1 shadow-none border-0">
+            <Card.Header className="p-0 pb-1">
+              <Card.Title className="text-4xl font-bold text-black tracking-tight">{s.value}</Card.Title>
+            </Card.Header>
+            <Card.Description className="text-xs text-gray-500 uppercase tracking-widest font-medium">{s.label}</Card.Description>
+          </Card>
         ))}
       </motion.div>
     </section>
@@ -212,21 +211,14 @@ function ExperienceSection() {
                 <p className="text-sm text-white/40">{role.company}</p>
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <Chip
-                  size="sm"
-                  variant="flat"
-                  classNames={{
-                    base: "bg-amber-500/10 border border-amber-500/25",
-                    content: "text-amber-400 text-xs font-semibold",
-                  }}
-                >
+                <Chip className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold px-2 py-0.5 rounded-full">
                   {role.tag}
                 </Chip>
                 <span className="text-xs text-white/30 font-mono">{role.period}</span>
               </div>
             </div>
 
-            <Divider className="bg-white/5 mb-5" />
+            <Separator className="bg-white/5 mb-5" />
 
             <ul className="space-y-2.5">
               {role.points.map((pt, j) => (
@@ -310,14 +302,7 @@ function ProjectsSection() {
                   </a>
                 )}
               </div>
-              <Chip
-                size="sm"
-                variant="flat"
-                classNames={{
-                  base: "bg-white/5 border border-white/8 shrink-0",
-                  content: "text-white/50 text-xs",
-                }}
-              >
+              <Chip className="bg-white/5 border border-white/8 text-white/50 text-xs px-2 py-0.5 rounded-full shrink-0">
                 {p.tag}
               </Chip>
             </div>
@@ -390,12 +375,7 @@ function SkillsSection() {
               {g.items.map((item) => (
                 <Chip
                   key={item}
-                  size="sm"
-                  variant="flat"
-                  classNames={{
-                    base: "bg-white/4 border border-white/8 hover:border-amber-500/30 hover:bg-amber-500/8 transition-all duration-200 cursor-default",
-                    content: "text-white/60 text-xs",
-                  }}
+                  className="bg-white/4 border border-white/8 hover:border-amber-500/30 hover:bg-amber-500/8 transition-all duration-200 cursor-default text-white/60 text-xs px-2 py-0.5 rounded-full"
                 >
                   {item}
                 </Chip>
@@ -456,12 +436,7 @@ function EducationSection() {
             {certs.map((c) => (
               <Chip
                 key={c}
-                size="sm"
-                variant="flat"
-                classNames={{
-                  base: "bg-white/4 border border-white/8",
-                  content: "text-white/55 text-xs",
-                }}
+                className="bg-white/4 border border-white/8 text-white/55 text-xs px-2 py-0.5 rounded-full"
               >
                 {c}
               </Chip>
@@ -505,7 +480,7 @@ function ContactSection() {
             <Link
               key={l.href}
               href={l.href}
-              isExternal={!l.href.startsWith("mailto") && !l.href.startsWith("tel")}
+              {...(!l.href.startsWith("mailto") && !l.href.startsWith("tel") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="group flex items-center gap-3 text-white/45 hover:text-amber-400 transition-colors duration-200 w-fit text-sm"
             >
               <span className="h-px w-4 bg-current transition-all duration-200 group-hover:w-6" />
