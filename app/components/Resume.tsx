@@ -282,172 +282,138 @@ function ProjectsSection() {
         <SectionLabel number="03" label="Selected Projects" />
       </motion.div>
 
-      {/* Bento grid — row 1 */}
-      <div className="grid grid-cols-12 gap-4">
-        {/* Vision AI — large */}
-        <motion.div {...fadeUp(0)} className="col-span-12 md:col-span-7">
-          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[200px] flex flex-col">
-            <Card.Header className="pb-0">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[0].tag}</span>
-                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[0].name}</Card.Title>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {projects.map((p, i) => (
+          <motion.div key={i} {...fadeUp(i * 0.1)} className="flex">
+            <Card className="bg-white rounded-3xl shadow-none border-0 flex flex-col w-full">
+              <Card.Header className="pb-3">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-bold text-amber-500 uppercase tracking-widest border border-amber-200 bg-amber-50 px-2.5 py-1 rounded-full">
+                    {p.tag}
+                  </span>
+                  <span className="text-3xl font-black text-gray-100 select-none leading-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">01</span>
-              </div>
-            </Card.Header>
-            <Card.Content className="flex-1">
-              <p className="text-sm text-gray-500 leading-relaxed">{projects[0].description}</p>
-            </Card.Content>
-            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
-              {projects[0].stack.map(t => (
-                <span key={t} className="px-2.5 py-1 rounded-lg bg-amber-50 text-[11px] text-amber-700 font-mono border border-amber-100">{t}</span>
-              ))}
-            </Card.Footer>
-          </Card>
-        </motion.div>
+                <Card.Title className="text-xl font-black text-gray-900 leading-tight">
+                  {p.name}
+                </Card.Title>
+                {p.url && (
+                  <a
+                    href={`https://${p.url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors mt-0.5 inline-block"
+                  >
+                    {p.url} ↗
+                  </a>
+                )}
+              </Card.Header>
 
-        {/* Qias — small */}
-        <motion.div {...fadeUp(0.1)} className="col-span-12 md:col-span-5">
-          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[200px] flex flex-col">
-            <Card.Header className="pb-0">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[2].tag}</span>
-                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[2].name}</Card.Title>
-                </div>
-                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">02</span>
-              </div>
-            </Card.Header>
-            <Card.Content className="flex-1">
-              <p className="text-sm text-gray-500 leading-relaxed">{projects[2].description}</p>
-            </Card.Content>
-            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
-              {projects[2].stack.map(t => (
-                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
-              ))}
-            </Card.Footer>
-          </Card>
-        </motion.div>
+              <Card.Content className="flex-1 pt-0">
+                <p className="text-sm text-gray-500 leading-relaxed">{p.description}</p>
+              </Card.Content>
 
-        {/* Forge — small */}
-        <motion.div {...fadeUp(0.2)} className="col-span-12 md:col-span-5">
-          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[180px] flex flex-col">
-            <Card.Header className="pb-0">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[3].tag}</span>
-                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[3].name}</Card.Title>
-                  {projects[3].url && (
-                    <a href={`https://${projects[3].url}`} target="_blank" rel="noopener noreferrer"
-                      className="text-[11px] text-gray-400 hover:text-amber-600 font-mono transition-colors">
-                      {projects[3].url} ↗
-                    </a>
-                  )}
-                </div>
-                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">03</span>
-              </div>
-            </Card.Header>
-            <Card.Content className="flex-1">
-              <p className="text-sm text-gray-500 leading-relaxed">{projects[3].description}</p>
-            </Card.Content>
-            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
-              {projects[3].stack.map(t => (
-                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
-              ))}
-            </Card.Footer>
-          </Card>
-        </motion.div>
-
-        {/* Digital Marketplace — large */}
-        <motion.div {...fadeUp(0.3)} className="col-span-12 md:col-span-7">
-          <Card className="bg-white rounded-3xl shadow-none border-0 h-full min-h-[180px] flex flex-col">
-            <Card.Header className="pb-0">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="text-[11px] font-bold text-amber-500 uppercase tracking-widest">{projects[1].tag}</span>
-                  <Card.Title className="text-2xl font-black text-gray-900 mt-1">{projects[1].name}</Card.Title>
-                </div>
-                <span className="text-5xl font-black text-gray-100 select-none leading-none mt-1">04</span>
-              </div>
-            </Card.Header>
-            <Card.Content className="flex-1">
-              <p className="text-sm text-gray-500 leading-relaxed">{projects[1].description}</p>
-            </Card.Content>
-            <Card.Footer className="flex flex-wrap gap-1.5 pt-0">
-              {projects[1].stack.map(t => (
-                <span key={t} className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono">{t}</span>
-              ))}
-            </Card.Footer>
-          </Card>
-        </motion.div>
+              <Card.Footer className="pt-3 flex flex-wrap gap-1.5">
+                {p.stack.map((t) => (
+                  <span
+                    key={t}
+                    className="px-2.5 py-1 rounded-lg bg-gray-100 text-[11px] text-gray-500 font-mono"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </Card.Footer>
+            </Card>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
 }
 
 /* ── 5. SKILLS ────────────────────────────────────────────── */
-function SkillsSection() {
-  const groups = [
-    {
-      label: "DevOps & Cloud",
-      items: ["Docker", "Kubernetes", "GitHub Actions", "CI/CD Pipelines", "Microsoft Azure"],
-    },
-    {
-      label: "Backend",
-      items: ["ASP.NET Core", "C#", "Python", "FastAPI", "Clean Architecture"],
-    },
-    {
-      label: "Frontend",
-      items: ["React", "React Native", "TypeScript"],
-    },
-    {
-      label: "Databases",
-      items: ["PostgreSQL", "SQL (Advanced)", "Redis", "Hadoop", "HDFS"],
-    },
-    {
-      label: "AI / ML / CV",
-      items: ["CNN", "ResNet", "Transfer Learning", "Scikit-learn", "NumPy", "Pandas", "Feature Engineering"],
-    },
-    {
-      label: "Data & Visualization",
-      items: ["Power BI", "Excel", "ETL", "EDA", "Statistical Analysis"],
-    },
-    {
-      label: "Infrastructure",
-      items: ["Windows Server", "Active Directory", "TCP/IP", "Networking"],
-    },
-  ];
+const skillBubbles = [
+  { name: "Docker",           size: "lg",  color: "amber" },
+  { name: "Kubernetes",       size: "lg",  color: "amber" },
+  { name: "Python",           size: "lg",  color: "amber" },
+  { name: "ASP.NET Core",     size: "lg",  color: "amber" },
+  { name: "GitHub Actions",   size: "md",  color: "white" },
+  { name: "Azure",            size: "md",  color: "white" },
+  { name: "CI/CD",            size: "md",  color: "white" },
+  { name: "React",            size: "md",  color: "white" },
+  { name: "PostgreSQL",       size: "md",  color: "white" },
+  { name: "C#",               size: "md",  color: "amber" },
+  { name: "FastAPI",          size: "md",  color: "white" },
+  { name: "Redis",            size: "sm",  color: "white" },
+  { name: "CNN",              size: "md",  color: "amber" },
+  { name: "ResNet",           size: "sm",  color: "white" },
+  { name: "Transfer Learning",size: "md",  color: "amber" },
+  { name: "Scikit-learn",     size: "sm",  color: "white" },
+  { name: "NumPy",            size: "sm",  color: "white" },
+  { name: "Pandas",           size: "sm",  color: "white" },
+  { name: "Power BI",         size: "sm",  color: "white" },
+  { name: "TypeScript",       size: "md",  color: "white" },
+  { name: "React Native",     size: "sm",  color: "white" },
+  { name: "SQL",              size: "sm",  color: "white" },
+  { name: "Hadoop",           size: "sm",  color: "white" },
+  { name: "Clean Architecture",size:"md",  color: "amber" },
+  { name: "ETL",              size: "sm",  color: "white" },
+  { name: "Active Directory", size: "sm",  color: "white" },
+  { name: "TCP/IP",           size: "sm",  color: "white" },
+  { name: "Feature Engineering",size:"sm", color: "white" },
+  { name: "Windows Server",   size: "sm",  color: "white" },
+  { name: "EDA",              size: "sm",  color: "white" },
+];
 
+function SkillsSection() {
   return (
     <section id="skills" className="py-28 md:py-36 px-8 md:px-16 max-w-6xl mx-auto">
       <motion.div {...fadeUp()}>
         <SectionLabel number="04" label="Skills & Stack" />
       </motion.div>
 
-      <div className="divide-y divide-white/5">
-        {groups.map((g, i) => (
-          <motion.div
-            key={i}
-            {...fadeUp(i * 0.05)}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-8 py-6 first:pt-0 last:pb-0"
-          >
-            <div className="sm:w-40 shrink-0 pt-0.5">
-              <span className="text-[11px] font-bold text-amber-500/80 uppercase tracking-[0.15em]">{g.label}</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {g.items.map((item) => (
-                <span
-                  key={item}
-                  className="px-3 py-1 rounded-full bg-white/5 border border-white/8 text-[12px] text-white/60 hover:text-white/90 hover:bg-white/8 hover:border-amber-500/30 transition-all duration-150 cursor-default"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-wrap gap-3 justify-center"
+      >
+        {skillBubbles.map((skill, i) => {
+          const isAmber = skill.color === "amber";
+          const sizeCls =
+            skill.size === "lg"
+              ? "text-sm px-5 py-2.5 text-[13px]"
+              : skill.size === "md"
+              ? "text-xs px-4 py-2"
+              : "text-[11px] px-3 py-1.5";
+
+          return (
+            <motion.span
+              key={skill.name}
+              animate={{ y: [0, -(6 + (i % 5) * 2), 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 2.8 + (i % 7) * 0.4,
+                ease: "easeInOut",
+                delay: (i % 11) * 0.18,
+              }}
+              whileHover={{ scale: 1.12, y: -8 }}
+              className={`
+                cursor-default select-none rounded-full font-medium border transition-colors duration-200
+                ${sizeCls}
+                ${isAmber
+                  ? "bg-amber-500/12 border-amber-500/35 text-amber-400 hover:bg-amber-500/20 hover:border-amber-400/60"
+                  : "bg-white/5 border-white/10 text-white/55 hover:bg-white/10 hover:text-white/80 hover:border-white/20"
+                }
+              `}
+            >
+              {skill.name}
+            </motion.span>
+          );
+        })}
+      </motion.div>
     </section>
   );
 }
