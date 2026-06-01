@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Chip, Link, Separator, Card } from "@heroui/react";
+import { Chip, Link, Separator, Card, CloseButton, Button } from "@heroui/react";
 
 /* ── helpers ──────────────────────────────────────────────── */
 function fadeUp(delay = 0) {
@@ -169,13 +169,15 @@ function ExperienceSection() {
       company: "Government Sector — Sultanate of Oman",
       period: "2020 – Present",
       tag: "6 Years",
-      icon: "GOV",
-      gradient: "from-amber-500/15 to-amber-900/5",
+      tagline: "Mission-critical enterprise IT",
+      bgFrom: "#C8962A",
+      bgTo: "#8B6318",
+      initials: "G",
       points: [
         "Six-year progression through the full enterprise IT stack inside a mission-critical government environment.",
         "Started in infrastructure: Windows Server, Active Directory, networking, and systems administration.",
         "Moved into backend → full-stack development supporting internal mission-critical applications.",
-        "Now operating as DevOps: containerized deployments, CI/CD pipelines, monitoring, incident response, and change-management discipline.",
+        "Now operating as DevOps: containerized deployments, CI/CD pipelines, monitoring, incident response.",
       ],
     },
     {
@@ -183,8 +185,10 @@ function ExperienceSection() {
       company: "Independent / Project-based",
       period: "2020 – Present",
       tag: "6 Years",
-      icon: "FRL",
-      gradient: "from-white/8 to-white/2",
+      tagline: "Backend · DevOps · AI · SaaS",
+      bgFrom: "#1a1a2e",
+      bgTo: "#16213e",
+      initials: "F",
       points: [
         "Six continuous years of freelance across backend, DevOps, AI, and multi-tenant SaaS.",
         "Building and operating a multi-tenant GCC marketplace platform on ASP.NET Core and Clean Architecture.",
@@ -203,43 +207,59 @@ function ExperienceSection() {
       <div className="space-y-5">
         {roles.map((role, i) => (
           <motion.div key={i} {...fadeUp(i * 0.1)}>
-            <Card className="flex flex-col sm:flex-row border border-white/8 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/12 transition-all duration-300 overflow-hidden rounded-3xl">
-              {/* Left accent panel */}
-              <div className={`relative h-[100px] w-full shrink-0 overflow-hidden sm:h-auto sm:w-[130px] bg-gradient-to-br ${role.gradient} flex items-center justify-center`}>
-                <span className="text-2xl font-black text-amber-400/60 tracking-widest select-none">
-                  {role.icon}
+            <Card className="relative flex h-auto min-h-[152px] flex-col sm:flex-row bg-white rounded-3xl overflow-hidden shadow-sm">
+
+              {/* Left visual panel */}
+              <div
+                className="relative h-[110px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-auto sm:w-[130px] flex flex-col items-center justify-center gap-1 select-none"
+                style={{ background: `linear-gradient(135deg, ${role.bgFrom}, ${role.bgTo})` }}
+              >
+                <span className="text-4xl font-black text-white/80">{role.initials}</span>
+                <span className="text-[10px] font-semibold text-white/50 uppercase tracking-widest px-2 text-center leading-tight">
+                  {role.tagline}
                 </span>
               </div>
 
-              {/* Content */}
-              <div className="flex flex-1 flex-col">
-                <Card.Header className="gap-1 pb-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full pr-2">
-                    <Card.Title className="text-base sm:text-lg font-semibold text-white leading-snug">
-                      {role.title}
-                    </Card.Title>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <Chip className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-                        {role.tag}
-                      </Chip>
-                      <span className="text-[11px] text-white/30 font-mono">{role.period}</span>
+              {/* Right content */}
+              <div className="flex flex-1 flex-col gap-2">
+                <Card.Header className="gap-1 pb-1">
+                  <div className="flex items-start justify-between gap-2 w-full">
+                    <div>
+                      <Card.Title className="text-base sm:text-lg font-semibold text-gray-900 leading-snug pr-6">
+                        {role.title}
+                      </Card.Title>
+                      <Card.Description className="text-sm text-gray-500 mt-0.5">
+                        {role.company}
+                      </Card.Description>
                     </div>
+                    <CloseButton aria-label="Dismiss" className="absolute top-3 right-3 text-gray-400 hover:text-gray-600" />
                   </div>
-                  <Card.Description className="text-sm text-white/40">{role.company}</Card.Description>
                 </Card.Header>
 
-                <Separator className="bg-white/5 mx-4" />
-
-                <Card.Content className="pt-3 pb-4">
-                  <ul className="space-y-2">
+                <Card.Content className="py-0">
+                  <ul className="space-y-1.5">
                     {role.points.map((pt, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-sm text-white/50 leading-relaxed">
-                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-500/50" />
+                      <li key={j} className="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                        <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                         {pt}
                       </li>
                     ))}
                   </ul>
                 </Card.Content>
+
+                <Card.Footer className="mt-auto flex w-full items-center justify-between pt-2">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-gray-900">{role.tag}</span>
+                    <span className="text-xs text-gray-400 font-mono">{role.period}</span>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="tertiary"
+                    className="text-amber-600 hover:text-amber-700 text-xs font-semibold"
+                  >
+                    View Details
+                  </Button>
+                </Card.Footer>
               </div>
             </Card>
           </motion.div>
