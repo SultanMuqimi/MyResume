@@ -31,7 +31,7 @@ function HeroSection() {
       {/* photo */}
       <Image
         src="/images/hero.jpg"
-        alt="Sultan AlMuqaimi"
+        alt="Sultan Ahmed Rashid AlMuqaimi"
         fill
         priority
         className="object-cover object-top"
@@ -54,11 +54,11 @@ function HeroSection() {
             <span className="text-xs text-white/50 font-mono tracking-widest uppercase">Muscat, Oman</span>
           </div>
 
-          {/* name */}
+          {/* name you this is the same name that appears in the title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-none mb-4">
-            Sultan
+            Sultan Ahmed Rashid 
             <br />
-            <span className="text-white/90">AlMuqaimi</span>
+            <span className="text-white/90">AlMuqaimi.Sultan</span>
           </h1>
 
           {/* role */}
