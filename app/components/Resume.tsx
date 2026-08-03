@@ -56,9 +56,9 @@ function HeroSection() {
 
           {/* name you this is the same name that appears in the title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-none mb-4">
-            Sultan Ahmed Rashid 
+            Sultan 
             <br />
-            <span className="text-white/90">AlMuqaimi.Sultan</span>
+            <span className="text-white/90">AlMuqaimi-97774591</span>
           </h1>
 
           {/* role */}
