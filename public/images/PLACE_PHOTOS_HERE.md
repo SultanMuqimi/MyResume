@@ -7,7 +7,7 @@ Save your photos here with these exact filenames:
 | hero.jpg             | Direct camera, clean desk, professional portrait | Sultan AlMuqaimi (hero) |
 | focused.jpg          | Close-up, blue kuma, intense focused look    | Ministry of Defence     |
 | problem-solving.jpg  | Wide shot, messy desk, thinking pose, lamp   | The Freelancer          |
-| founder-close.jpg    | Press conference close-up, smiling at camera | Qias                    |
+| founder-close.jpg    | Press confeerence close-up, smiling at camera | Qias                    |
 | press-conference.jpg | Wide press conference shot, Arabic screen    | The Stage               |
 | presentation.jpg     | Standing, presenting to team at screen       | Builder                 |
 | collaboration.jpg    | Two engineers at laptop, dark office         | The Stack               |
